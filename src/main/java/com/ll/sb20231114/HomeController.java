@@ -3,6 +3,7 @@ package com.ll.sb20231114;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -220,6 +221,20 @@ public class HomeController {
                 """.formatted(subject, content);
 
         return html;
+    }
+
+    @GetMapping("/calc20")
+    // @ResponseBody를 안붙이면 리턴값 앞에 src/main/resources/templates/ 가, 뒤에 .html이 붙는다.
+    String showCalc20() {
+        return "calc20";
+    }
+
+    @GetMapping("/calc21")
+    String showCalc21(Model model) { // ctrl+1 후 로그백 말고 springframe 어쩌고 클릭
+        // 빈칸을 채우고 싶다면 model에 넣어라, 그러면 자동으로 들어간다.
+        model.addAttribute("v1", "안녕");
+        model.addAttribute("v2", "반가워");
+        return "calc21";
     }
 }
 
