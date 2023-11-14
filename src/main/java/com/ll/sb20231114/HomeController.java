@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Map;
 
 @Controller // 컨트롤러
-public class HomeController {
+public class HomeController { // HomeController가 1개 -> 싱글톤 -> 객체의 개수가 1개로 고정
 
     @GetMapping("/") // 요청을 받으면 아래를 실행하라
     @ResponseBody // 이 함수의 리턴값을 그대로 브라우저에 전송하라는 의미
@@ -235,6 +235,16 @@ public class HomeController {
         model.addAttribute("v1", "안녕");
         model.addAttribute("v2", "ㅋㅋ");
         return "calc21";
+    }
+
+    int num = 0; // 객체, 인스턴스 변수
+
+    @GetMapping("/calc22")
+    @ResponseBody
+    int showCalc22() { // 클래스
+        num++;
+
+        return num;
     }
 }
 
