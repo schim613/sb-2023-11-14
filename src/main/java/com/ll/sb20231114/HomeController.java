@@ -233,7 +233,7 @@ public class HomeController {
     String showCalc21(Model model) { // ctrl+1 후 로그백 말고 springframe 어쩌고 클릭
         // 빈칸을 채우고 싶다면 model에 넣어라, 그러면 자동으로 들어간다.
         model.addAttribute("v1", "안녕");
-        model.addAttribute("v2", "반가워");
+        model.addAttribute("v2", "ㅋㅋ");
         return "calc21";
     }
 }
