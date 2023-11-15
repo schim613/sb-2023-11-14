@@ -1,6 +1,8 @@
 
+<!-- form => URL 생성기-->
 <!-- onsubmit="return false;"을 통해 폼 발송을 막았다. -->
-<form onsubmit="submitWriteForm(this); return false;" style="display: flex; flex-direction: column; gap: 20px; max-width: 500px;">
+<form action="/artice/doWrite" onsubmit="submitWriteForm(this); return false;"
+      style="display: flex; flex-direction: column; gap: 20px; max-width: 500px;">
     <input type="text" name="title" placeholder="제목">
 
     <input type="text" name="body" placeholder="내용">
@@ -11,6 +13,9 @@
         글쓰기
     </button>
 </form>
+
+<!-- a 엘리멘트는 고정된 값으로 자유도가 낮음 -->
+<a href="http://localhost:8020/article/doWrite?title=제목임&body=내용임">전송</a>
 
 <script>
     function submitWriteForm(form) {
@@ -37,6 +42,6 @@
             return;
         }
 
-        location.href = `/article/doWrite?title=${title}&body=${body}`;
+        form.submit();
     }
 </script>
