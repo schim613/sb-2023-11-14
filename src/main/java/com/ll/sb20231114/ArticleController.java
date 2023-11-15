@@ -6,10 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 // 액션 컨트롤러들을 한 곳에 모아 써도 되고, 나눠 써도 된다.
 // 하지만 쓰임에 맞게 나누면 좋음!
@@ -24,17 +21,18 @@ public class ArticleController {
 
     @GetMapping("/article/doWrite")
     @ResponseBody
-    Map<String, Object> doWrite(
+    RsData doWrite(
             String title,
             String body
     ) {
         Article article = new Article(articles.size() + 1, title, body);
-
-        Map<String, Object> rs = new HashMap<>();
-        rs.put("msg", "%d번 게시물이 작성되었습니다.".formatted(article.getId()));
-        rs.put("data", article);
-
         articles.add(article);
+
+        RsData rs = new RsData(
+                "S-1",
+                "%d번 게시물이 작성되었습니다.".formatted(article.getId()),
+                article
+        );
 
         return rs;
     }
@@ -50,6 +48,14 @@ public class ArticleController {
     List<Article> getArticles () {
         return articles;
     }
+}
+
+@AllArgsConstructor
+@Getter
+class RsData {
+    private String resultCode;
+    private String msg;
+    private Object data;
 }
 
 @AllArgsConstructor
