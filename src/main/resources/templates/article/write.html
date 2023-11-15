@@ -1,7 +1,11 @@
+<!--
+GET => 90% 조회하고 가져오는 것
+POST => 10% 작성, 수정, 삭제하는 것
+-->
 
 <!-- form => URL 생성기-->
 <!-- onsubmit="return false;"을 통해 폼 발송을 막았다. -->
-<form method="POST" action="/artice/write" onsubmit="submitWriteForm(this); return false;"
+<form method="POST" onsubmit="submitWriteForm(this); return false;"
       style="display: flex; flex-direction: column; gap: 20px; max-width: 500px;">
     <input type="text" name="title" placeholder="제목">
 

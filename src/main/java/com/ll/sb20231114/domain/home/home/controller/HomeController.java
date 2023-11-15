@@ -1,4 +1,4 @@
-package com.ll.sb20231114;
+package com.ll.sb20231114.domain.home.home.controller;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -16,7 +16,8 @@ import java.util.Map;
 public class HomeController { // HomeController가 1개 -> 싱글톤 -> 객체의 개수가 1개로 고정
 
     @GetMapping("/") // 요청을 받으면 아래를 실행하라
-    @ResponseBody // 이 함수의 리턴값을 그대로 브라우저에 전송하라는 의미
+    @ResponseBody
+        // 이 함수의 리턴값을 그대로 브라우저에 전송하라는 의미
     String showMain() {
         System.out.println("안녕하세요!!!");
         return "안녕하세요";
@@ -224,7 +225,7 @@ public class HomeController { // HomeController가 1개 -> 싱글톤 -> 객체�
     }
 
     @GetMapping("/calc20")
-    // @ResponseBody를 안붙이면 리턴값 앞에 src/main/resources/templates/ 가, 뒤에 .html이 붙는다.
+        // @ResponseBody를 안붙이면 리턴값 앞에 src/main/resources/templates/ 가, 뒤에 .html이 붙는다.
     String showCalc20() {
         return "calc20";
     }

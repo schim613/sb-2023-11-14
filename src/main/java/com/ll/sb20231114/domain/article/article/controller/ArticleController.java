@@ -1,7 +1,7 @@
-package com.ll.sb20231114;
+package com.ll.sb20231114.domain.article.article.controller;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
+import com.ll.sb20231114.domain.article.article.entity.Article;
+import com.ll.sb20231114.global.rsData.RsData;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,7 +23,7 @@ public class ArticleController {
         return "article/write";
     }
 
-//    GET /article/doWrite?title=제목&body=내용
+    //    GET /article/doWrite?title=제목&body=내용
     @PostMapping("/article/write")
     @ResponseBody
     RsData<Article> write(String title, String body) {
@@ -35,32 +35,17 @@ public class ArticleController {
         return new RsData<>("S-1", "성공", article);
     }
 
-//    GET /article/getLastArticle
+    //    GET /article/getLastArticle
     @GetMapping("/article/getLastArticle")
     @ResponseBody
     Article getLastArticle() {
         return articles.getLast();
     }
-//    GET /article/getArticles
+
+    //    GET /article/getArticles
     @GetMapping("/article/getArticles")
     @ResponseBody
     List<Article> getArticles() {
         return articles;
     }
-}
-
-@AllArgsConstructor
-@Getter
-class Article {
-    private long id;
-    private String title;
-    private String body;
-}
-
-@AllArgsConstructor
-@Getter
-class RsData<T> {
-    private String resultCode;
-    private String msg;
-    private T data;
 }
