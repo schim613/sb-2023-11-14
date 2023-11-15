@@ -24,9 +24,9 @@ public class ArticleController {
     }
 
 //    GET /article/doWrite?title=제목&body=내용
-    @PostMapping("/article/doWrite")
+    @PostMapping("/article/write")
     @ResponseBody
-    RsData<Article> doWrite(String title, String body) {
+    RsData<Article> write(String title, String body) {
         long id = articles.size() + 1;
 
         Article article = new Article(id, title, body);
