@@ -1,13 +1,13 @@
 package com.ll.sb20231114.domain.article.article.controller;
 
 import com.ll.sb20231114.domain.article.article.entity.Article;
+import com.ll.sb20231114.domain.article.article.service.ArticleService;
 import com.ll.sb20231114.global.rsData.RsData;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -15,7 +15,7 @@ import java.util.List;
 // 하지만 쓰임에 맞게 나누면 좋음!
 @Controller
 public class ArticleController {
-    private List<Article> articles = new ArrayList<>();
+    private final ArticleService articleService = new ArticleService();
 
     //    GET /article/write
     @GetMapping("/article/write")
@@ -26,26 +26,32 @@ public class ArticleController {
     //    GET /article/doWrite?title=제목&body=내용
     @PostMapping("/article/write")
     @ResponseBody
-    RsData<Article> write(String title, String body) {
-        long id = articles.size() + 1;
+    RsData<Article> write(
+            String title,
+            String body
+    ) {
+        Article article = articleService.write(title, body);
 
-        Article article = new Article(id, title, body);
-        articles.add(article);
+        RsData<Article> rs = new RsData<>(
+                "S-1",
+                "%d번 게시물이 작성되었습니다.".formatted(article.getId()),
+                article
+        );
 
-        return new RsData<>("S-1", "성공", article);
+        return rs;
     }
 
     //    GET /article/getLastArticle
     @GetMapping("/article/getLastArticle")
     @ResponseBody
     Article getLastArticle() {
-        return articles.getLast();
+        return articleService.findLastArticle();
     }
 
     //    GET /article/getArticles
     @GetMapping("/article/getArticles")
     @ResponseBody
     List<Article> getArticles() {
-        return articles;
+        return articleService.findAll();
     }
 }
