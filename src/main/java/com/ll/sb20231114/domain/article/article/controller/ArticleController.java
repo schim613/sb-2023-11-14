@@ -19,7 +19,7 @@ public class ArticleController {
     @Autowired // 필드 주입, final은 뺀다.
     private final ArticleService articleService;
 
-    @Autowired
+    // @Autowired // 생성자 주입
     public ArticleController(ArticleService articleService) {
         this.articleService = articleService;
     }
