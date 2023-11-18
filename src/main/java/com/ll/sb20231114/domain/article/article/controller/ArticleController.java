@@ -1,10 +1,13 @@
 package com.ll.sb20231114.domain.article.article.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ll.sb20231114.domain.article.article.entity.Article;
 import com.ll.sb20231114.domain.article.article.service.ArticleService;
 import com.ll.sb20231114.global.rsData.RsData;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
+import lombok.SneakyThrows;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -53,9 +56,10 @@ public class ArticleController {
     }
 
     @PostMapping("/article/write2")
-    @ResponseBody
-    RsData write2(
-            HttpServletRequest req
+    @SneakyThrows
+    void write2(
+            HttpServletRequest req,
+            HttpServletResponse resp
     ) {
         String title = req.getParameter("title");
         String body = req.getParameter("body");
@@ -68,7 +72,9 @@ public class ArticleController {
                 article
         );
 
-        return rs;
+        ObjectMapper objectMapper = new ObjectMapper();
+
+        resp.getWriter().println(objectMapper.writeValueAsString(rs));
     }
 
     //    GET /article/getLastArticle
