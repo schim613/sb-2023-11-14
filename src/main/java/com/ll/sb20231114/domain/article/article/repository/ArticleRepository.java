@@ -9,7 +9,7 @@ import java.util.List;
 @Repository
 @RequiredArgsConstructor
 public class ArticleRepository {
-    private final ArticleArrayList articles;
+    private final List<Article> articles;
 
     public Article save(Article article) {
         if (article.getId() == 0) {
