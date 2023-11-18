@@ -4,7 +4,6 @@ import com.ll.sb20231114.domain.article.article.entity.Article;
 import com.ll.sb20231114.domain.article.article.service.ArticleService;
 import com.ll.sb20231114.global.rsData.RsData;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,10 +17,10 @@ import java.util.List;
 @Controller
 @RequiredArgsConstructor // final 필드들(입력받은 생성자)을 자동으로 생성해라
 public class ArticleController {
-    @Autowired // 필드 주입, final은 뺀다.
+    // @Autowired 필드 주입, final은 뺀다.
     private final ArticleService articleService;
 
-    // @Autowired는 생성자가 하나면 생략 가능
+    // @Autowired 는 생성자가 하나면 생략 가능
     // 생성자 주입 => @RequiredArgsConstructor로 자동 생성되어 생략 가능
     // public ArticleController(ArticleService articleService) {
     //     this.articleService = articleService;
