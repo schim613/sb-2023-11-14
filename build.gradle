@@ -29,6 +29,12 @@ dependencies {
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
 
+    // 액츄에이터
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+
+    // 밸리데이션
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+
     // 스프링 웹
     implementation 'org.springframework.boot:spring-boot-starter-web'
 
