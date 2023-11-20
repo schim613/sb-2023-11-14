@@ -3,24 +3,17 @@
 <div layout:fragment="content">
     <h1>글 작성</h1>
 
-    <!-- form => URL 생성기-->
-    <!-- onsubmit="return false;"을 통해 폼 발송을 막았다. -->
     <form method="POST" onsubmit="submitWriteForm(this); return false;"
           style="display: flex; flex-direction: column; gap: 20px; max-width: 500px;">
         <input type="text" name="title" placeholder="제목">
 
         <input type="text" name="body" placeholder="내용">
 
-        <!-- javascript:; 는 아무 것도 하지 않는다는 뜻 -->
-        <!-- <input type="submit" value="글쓰기"> -->
         <button type="submit">
             글쓰기
         </button>
 
-    <!--    <input onclick="this.closest('form').setAttribute('action', '/article/write2')" type="submit" value="글쓰기">-->
     </form>
-    <!-- a 엘리멘트는 고정된 값으로 자유도가 낮음
-    <a href="http://localhost:8020/article/doWrite?title=제목임&body=내용임">전송</a> -->
 
     <script>
         function submitWriteForm(form) {
@@ -51,3 +44,5 @@
         }
     </script>
 </div>
+
+</html>
