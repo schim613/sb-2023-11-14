@@ -13,10 +13,12 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
+import java.util.Optional;
 
 
 // 액션 컨트롤러들을 한 곳에 모아 써도 되고, 나눠 써도 된다.
@@ -33,6 +35,15 @@ public class ArticleController {
     // public ArticleController(ArticleService articleService) {
     //     this.articleService = articleService;
     // }
+
+    @GetMapping("/article/detail/{id}")
+    @ResponseBody
+    String showDetail(@PathVariable long id) {
+        Optional<Article> opArticle = articleService.findById(id);
+        Article article = opArticle.get();
+
+        return "article/detail";
+    }
 
     //    GET /article/write
     @GetMapping("/article/write")
