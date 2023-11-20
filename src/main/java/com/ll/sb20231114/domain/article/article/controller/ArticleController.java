@@ -6,12 +6,13 @@ import com.ll.sb20231114.global.rq.Rq;
 import com.ll.sb20231114.global.rsData.RsData;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -23,7 +24,6 @@ import java.util.List;
 // 하지만 쓰임에 맞게 나누면 좋음!
 @Controller
 @RequiredArgsConstructor // final 필드들(입력받은 생성자)을 자동으로 생성해라
-@Validated
 public class ArticleController {
     // @Autowired 필드 주입, final은 뺀다.
     private final ArticleService articleService;
@@ -41,13 +41,18 @@ public class ArticleController {
         return "article/write";
     }
 
+    @Data
+    public static class WriteForm {
+        @NotBlank(message = "제목 좀..")
+        private String title;
+        @NotBlank @NotNull
+        private String body;
+    }
+
     //    GET /article/doWrite?title=제목&body=내용
     @PostMapping("/article/write")
     @ResponseBody
-    RsData write(
-            @NotBlank(message = "제목 좀..") String title,
-            @NotBlank @NotNull String body
-    ) {
+    RsData write(@Valid WriteForm writeForm) {
 //        if (title == null || title.trim().length() == 0) {
 //            throw new IllegalArgumentException("제목을 입력해주세요");
 //        }
@@ -59,7 +64,7 @@ public class ArticleController {
 //            );
 //        }
 
-        Article article = articleService.write(title, body);
+        Article article = articleService.write(writeForm.title, writeForm.body);
 
         RsData<Article> rs = new RsData<>(
                 "S-1",
