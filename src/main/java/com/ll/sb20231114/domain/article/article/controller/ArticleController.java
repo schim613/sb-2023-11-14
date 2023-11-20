@@ -35,6 +35,15 @@ public class ArticleController {
     //     this.articleService = articleService;
     // }
 
+    @GetMapping("/article/delete/{id}")
+    String delete(@PathVariable long id) {
+        articleService.delete(id);
+
+        String msg = "id %d, article is deleted".formatted(id);
+
+        return "redirect:/article/list?msg=" + msg;
+    }
+
     @GetMapping("/article/detail/{id}")
     String showDetail(Model model, @PathVariable long id) {
         Article article = articleService.findById(id).get();
@@ -61,26 +70,9 @@ public class ArticleController {
     //    GET /article/doWrite?title=제목&body=내용
     @PostMapping("/article/write")
     String write(@Valid WriteForm writeForm) {
-//        if (title == null || title.trim().length() == 0) {
-//            throw new IllegalArgumentException("제목을 입력해주세요");
-//        }
-//
-//        if (body == null || body.trim().length() == 0) {
-//            return new RsData<>(
-//                    "F-2",
-//                    "내용을 입력해주세요."
-//            );
-//        }
-
         Article article = articleService.write(writeForm.title, writeForm.body);
-//
-//        RsData<Article> rs = new RsData<>(
-//                "S-1",
-//                "%d번 게시물이 작성되었습니다.".formatted(article.getId()),
-//                article
-//        );
 
-        String msg = "id %d, article created".formatted(article.getId());
+        String msg = "id %d, article is created".formatted(article.getId());
 
         return "redirect:/article/list?msg=" + msg;
     }
