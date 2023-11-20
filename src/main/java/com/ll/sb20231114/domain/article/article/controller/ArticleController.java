@@ -1,6 +1,5 @@
 package com.ll.sb20231114.domain.article.article.controller;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ll.sb20231114.domain.article.article.entity.Article;
 import com.ll.sb20231114.domain.article.article.service.ArticleService;
 import com.ll.sb20231114.global.rq.Rq;
@@ -8,8 +7,8 @@ import com.ll.sb20231114.global.rsData.RsData;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
-import lombok.SneakyThrows;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -57,30 +56,6 @@ public class ArticleController {
         return rs;
     }
 
-    @PostMapping("/article/write2")
-    @SneakyThrows
-    void write2(
-            HttpServletRequest req,
-            HttpServletResponse resp
-    ) {
-        String title = req.getParameter("title");
-        String body = req.getParameter("body");
-
-        Article article = articleService.write(title, body);
-
-        RsData<Article> rs = new RsData<>(
-                "S-1",
-                "%d번 게시물이 작성되었습니다.".formatted(article.getId()),
-                article
-        );
-
-        ObjectMapper objectMapper = new ObjectMapper();
-
-        resp.setContentType("application/json");
-        resp.setCharacterEncoding("UTF-8");
-        resp.getWriter().println(objectMapper.writeValueAsString(rs));
-    }
-
     //    GET /article/getLastArticle
     @GetMapping("/article/getLastArticle")
     @ResponseBody
@@ -118,5 +93,14 @@ public class ArticleController {
     @ResponseBody
     String rqPointer() {
         return rq.toString();
+    }
+
+    @GetMapping("/article/rqTest")
+    String showRqTest(Model model) {
+        String rqToString = rq.toString();
+
+        model.addAttribute("rqToString", rqToString);
+
+        return "article/rqTest";
     }
 }
