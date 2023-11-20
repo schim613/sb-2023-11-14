@@ -2,6 +2,7 @@ package com.ll.sb20231114.domain.article.article.controller;
 
 import com.ll.sb20231114.domain.article.article.entity.Article;
 import com.ll.sb20231114.domain.article.article.service.ArticleService;
+import com.ll.sb20231114.global.rq.Rq;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -25,6 +26,7 @@ import java.util.List;
 public class ArticleController {
     // @Autowired 필드 주입, final은 뺀다.
     private final ArticleService articleService;
+    private final Rq rq;
 
     //    GET /article/doWrite?title=제목&body=내용
     @GetMapping("/article/list")
@@ -64,10 +66,7 @@ public class ArticleController {
     String write(@Valid WriteForm writeForm) {
         Article article = articleService.write(writeForm.title, writeForm.body);
 
-        String msg = "%d번 게시물이 생성되었습니다.".formatted(article.getId());
-        msg = URLEncoder.encode(msg, StandardCharsets.UTF_8);
-
-        return "redirect:/article/list?msg=" + msg;
+        return rq.redirect("/article/list/", "%d번 게시물이 수정되었습니다.".formatted(article.getId()));
     }
 
     @GetMapping("/article/modify/{id}")
@@ -88,7 +87,7 @@ public class ArticleController {
     }
 
     @PostMapping("/article/modify/{id}")
-    String write(@PathVariable long id, @Valid ModifyForm modifyForm) {
+    String modify(@PathVariable long id, @Valid ModifyForm modifyForm) {
         articleService.modify(id, modifyForm.title, modifyForm.body);
 
         String msg = "%d번 게시물이 수정되었습니다.".formatted(id);
