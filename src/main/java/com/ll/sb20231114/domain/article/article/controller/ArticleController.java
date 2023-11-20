@@ -75,6 +75,16 @@ public class ArticleController {
         return rs;
     }
 
+    //    GET /article/doWrite?title=제목&body=내용
+    @GetMapping("/article/list")
+    String showList(Model model) {
+        List<Article> articles = articleService.findAll();
+
+        model.addAttribute("articles", articles);
+
+        return "article/list";
+    }
+
     //    GET /article/getLastArticle
     @GetMapping("/article/getLastArticle")
     @ResponseBody
