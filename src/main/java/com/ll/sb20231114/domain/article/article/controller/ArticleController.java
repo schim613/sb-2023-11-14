@@ -44,6 +44,23 @@ public class ArticleController {
         return "/article/modify";
     }
 
+    @Data
+    public static class ModifyForm {
+        @NotBlank(message = "제목 좀..")
+        private String title;
+        @NotBlank
+        private String body;
+    }
+
+    @PostMapping("/article/modify/{id}")
+    String write(@PathVariable long id, @Valid ModifyForm modifyForm) {
+        articleService.modify(id, modifyForm.title, modifyForm.body);
+
+        String msg = "id %d, article is modified".formatted(id);
+
+        return "redirect:/article/list?msg=" + msg;
+    }
+
     @GetMapping("/article/delete/{id}")
     String delete(@PathVariable long id) {
         articleService.delete(id);
