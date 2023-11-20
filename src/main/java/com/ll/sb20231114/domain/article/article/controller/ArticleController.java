@@ -92,4 +92,23 @@ public class ArticleController {
     List<Article> getArticles() {
         return articleService.findAll();
     }
+
+    @GetMapping("/article/articleServicePointer")
+    @ResponseBody
+    String articleServicePointer() {
+        return articleService.toString(); // 객체 주소가 같음 => 스프링부트가 만들어질 때, 객체를 딱 한개 만들고 계속 사용
+    }
+
+    // 리퀘스트와 리스폰스는 요청이 있을 때 잠깐 생겼다가 사라짐
+    @GetMapping("/article/httpServletRequestPointer")
+    @ResponseBody
+    String httpServletRequestPointer(HttpServletRequest req) {
+        return req.toString();
+    }
+
+    @GetMapping("/article/httpServletResponsePointer")
+    @ResponseBody
+    String httpServletResponsePointer(HttpServletResponse resp) {
+        return resp.toString();
+    }
 }
