@@ -14,8 +14,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import java.net.URLEncoder;
-import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 
@@ -66,7 +64,7 @@ public class ArticleController {
     String write(@Valid WriteForm writeForm) {
         Article article = articleService.write(writeForm.title, writeForm.body);
 
-        return rq.redirect("/article/list/", "%d번 게시물이 수정되었습니다.".formatted(article.getId()));
+        return rq.redirect("/article/list", "%d번 게시물이 생성되었습니다.".formatted(article.getId()));
     }
 
     @GetMapping("/article/modify/{id}")
@@ -90,20 +88,13 @@ public class ArticleController {
     String modify(@PathVariable long id, @Valid ModifyForm modifyForm) {
         articleService.modify(id, modifyForm.title, modifyForm.body);
 
-        String msg = "%d번 게시물이 수정되었습니다.".formatted(id);
-        msg = URLEncoder.encode(msg, StandardCharsets.UTF_8);
-
-        return "redirect:/article/list?msg=" + msg;
+        return rq.redirect("/article/list", "%d번 게시물이 수정되었습니다.".formatted(id));
     }
 
     @GetMapping("/article/delete/{id}")
     String delete(@PathVariable long id) {
         articleService.delete(id);
 
-
-        String msg = "%d번 게시물이 삭제되었습니다.".formatted(id);
-        msg = URLEncoder.encode(msg, StandardCharsets.UTF_8);
-
-        return "redirect:/article/list?msg=" + msg;
+        return rq.redirect("/article/list", "%d번 게시물이 삭제되었습니다.".formatted(id));
     }
 }
