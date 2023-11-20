@@ -36,9 +36,10 @@ public class ArticleController {
     // }
 
     @GetMapping("/article/detail/{id}")
-    @ResponseBody
-    String showDetail(@PathVariable long id) {
+    String showDetail(Model model, @PathVariable long id) {
         Article article = articleService.findById(id).get();
+
+        model.addAttribute("article", article);
 
         return "article/detail";
     }

@@ -15,6 +15,7 @@ public class ArticleRepository {
         add(new Article(1L, "제목1", "내용1"));
         add(new Article(2L, "제목2", "내용2"));
         add(new Article(3L, "제목3", "내용3"));
+        add(new Article(4L, "제목4", "내용4"));
     }};
 
     public Article save(Article article) {
