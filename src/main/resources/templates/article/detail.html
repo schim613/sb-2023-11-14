@@ -5,4 +5,7 @@
     <li><a href="/article/list">글 목록</a></li>
 </ul>
 
-[[${article}]]
+<h1>번호 : <span th:text="${article.id}"></span></h1>
+<h1>제목 : <span th:text="${article.title}"></span></h1>
+<h1>내용</h1>
+<div th:text="${article.body}"></div>
