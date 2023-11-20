@@ -11,6 +11,7 @@
 </head>
 <body>
 
+<link href="https://cdn.jsdelivr.net/npm/daisyui@4.4.2/dist/full.min.css" rel="stylesheet" type="text/css" />
 <script src="https://cdn.tailwindcss.com"></script>
 
 <div class="text-[#FF0000]" th:if="${param.msg} != null">
@@ -18,8 +19,10 @@
 </div>
 
 <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-    Click me
+    버튼1
 </button>
+
+<button class="btn btn-secondary">버튼2</button>
 
 <!-- 테일윈드 JIT 모드 -->
 <ul class="flex gap-[21.45px]">
