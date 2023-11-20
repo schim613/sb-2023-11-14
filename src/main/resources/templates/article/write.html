@@ -24,30 +24,30 @@ POST => 10% 작성, 수정, 삭제하는 것
 <a href="http://localhost:8020/article/doWrite?title=제목임&body=내용임">전송</a> -->
 
 <script>
-    function submitWriteForm(form) {
-        const inputTitle = form.title;
-        const inputBody = form.body;
+<!--    function submitWriteForm(form) {-->
+<!--        const inputTitle = form.title;-->
+<!--        const inputBody = form.body;-->
 
-        inputTitle.value = inputTitle.value.trim();
-        inputBody.value = inputBody.value.trim();
+<!--        inputTitle.value = inputTitle.value.trim();-->
+<!--        inputBody.value = inputBody.value.trim();-->
 
-        const title = inputTitle.value;
-        const body = inputBody.value;
+<!--        const title = inputTitle.value;-->
+<!--        const body = inputBody.value;-->
 
-        if (title.length == 0) {
-            alert('제목을 입력해주세요.');
-            inputTitle.focus();
+<!--        if (title.length == 0) {-->
+<!--            alert('제목을 입력해주세요.');-->
+<!--            inputTitle.focus();-->
 
-            return;
-        }
+<!--            return;-->
+<!--        }-->
 
-        if (body.length == 0) {
-            alert('내용을 입력해주세요.');
-            inputBody.focus();
+<!--        if (body.length == 0) {-->
+<!--            alert('내용을 입력해주세요.');-->
+<!--            inputBody.focus();-->
 
-            return;
-        }
+<!--            return;-->
+<!--        }-->
 
-        form.submit();
-    }
+<!--        form.submit();-->
+<!--    }-->
 </script>
