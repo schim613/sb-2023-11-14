@@ -3,6 +3,7 @@ package com.ll.sb20231114.domain.article.article.controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ll.sb20231114.domain.article.article.entity.Article;
 import com.ll.sb20231114.domain.article.article.service.ArticleService;
+import com.ll.sb20231114.global.rq.Rq;
 import com.ll.sb20231114.global.rsData.RsData;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -23,6 +24,7 @@ import java.util.List;
 public class ArticleController {
     // @Autowired 필드 주입, final은 뺀다.
     private final ArticleService articleService;
+    private final Rq rq;
 
     // @Autowired 는 생성자가 하나면 생략 가능
     // 생성자 주입 => @RequiredArgsConstructor로 자동 생성되어 생략 가능
@@ -110,5 +112,11 @@ public class ArticleController {
     @ResponseBody
     String httpServletResponsePointer(HttpServletResponse resp) {
         return resp.toString();
+    }
+
+    @GetMapping("/article/rqPointer")
+    @ResponseBody
+    String rqPointer() {
+        return rq.toString();
     }
 }
