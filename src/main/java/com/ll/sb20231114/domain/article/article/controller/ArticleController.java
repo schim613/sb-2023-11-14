@@ -34,13 +34,13 @@ public class ArticleController {
         return "article/list";
     }
 
-    @GetMapping("/article/delete/{id}")
-    String delete(@PathVariable long id) {
-        articleService.delete(id);
+    @GetMapping("/article/detail/{id}")
+    String showDetail(Model model, @PathVariable long id) {
+        Article article = articleService.findById(id).get();
 
-        String msg = "id %d, article is deleted".formatted(id);
+        model.addAttribute("article", article);
 
-        return "redirect:/article/list?msg=" + msg;
+        return "article/detail";
     }
 
     //    GET /article/write
@@ -62,7 +62,7 @@ public class ArticleController {
     String write(@Valid WriteForm writeForm) {
         Article article = articleService.write(writeForm.title, writeForm.body);
 
-        String msg = "id %d, article is created".formatted(article.getId());
+        String msg = "%d번 게시물 생성되었습니다.".formatted(article.getId());
 
         return "redirect:/article/list?msg=" + msg;
     }
@@ -93,12 +93,12 @@ public class ArticleController {
         return "redirect:/article/list?msg=" + msg;
     }
 
-    @GetMapping("/article/detail/{id}")
-    String showDetail(Model model, @PathVariable long id) {
-        Article article = articleService.findById(id).get();
+    @GetMapping("/article/delete/{id}")
+    String delete(@PathVariable long id) {
+        articleService.delete(id);
 
-        model.addAttribute("article", article);
+        String msg = "id %d, article is deleted".formatted(id);
 
-        return "article/detail";
+        return "redirect:/article/list?msg=" + msg;
     }
 }
