@@ -16,7 +16,7 @@ public class ArticleService {
 
     // 생성자 주입
     // @Autowired는 생성자가 하나면 생략 가능
-    // public ArticleService(ArticleRepository articleRepository) {
+    // public MemberService(MemberRepository articleRepository) {
     //     this.articleRepository = articleRepository;
     // }
 
