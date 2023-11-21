@@ -1,21 +1,22 @@
 <html layout:decorate="~{global/layout}">
 
-<div layout:fragment="content">
-    <h1>글 상세 페이지</h1>
+<div layout:fragment="content" class="p-5">
+    <h1 class="font-bold mb-4">글 내용</h1>
 
     <hr>
 
-    <h1>번호 : <span th:text="${article.id}"></span></h1>
-    <h1>제목 : <span th:text="${article.title}"></span></h1>
-    <h1>내용</h1>
-    <div th:text="${article.body}"></div>
+    <div class="mt-4 mb-4">
+        <div class="badge badge-primary badge-outline" th:text="${article.id}">primary</div>
+        <span class="text-bold" th:text="${article.title}"></span>
+    </div>
+    <div class="mt-4 mb-4" th:text="${article.body}"></div>
 
     <hr>
 
-    <ul style="display: flex; gap: 20px;">
-        <li><a th:href="|/article/modify/${article.id}|">글 수정</a></li>
-        <li><a onclick="return confirm('정말로 삭제하시겠습니까?');" th:href="|/article/delete/${article.id}|">글 삭제</a></li>
-    </ul>
+    <div class="flex justify-center gap-10 mt-10">
+        <a class="btn btn-primary" th:href="|/article/modify/${article.id}|">글 수정</a>
+        <a class="btn btn-secondary" onclick="return confirm('정말로 삭제하시겠습니까?');" th:href="|/article/delete/${article.id}|">글 삭제</a>
+    </div>
 </div>
 
 </html>
