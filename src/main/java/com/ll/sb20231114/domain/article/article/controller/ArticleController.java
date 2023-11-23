@@ -33,14 +33,14 @@ public class ArticleController {
     //    GET /article/doWrite?title=제목&body=내용
     @GetMapping("/article/list")
     String showList(Model model, HttpServletRequest req) {
-        long fromSessionLoginedMemberId = Optional
+        long LoginedMemberId = Optional
                 .ofNullable(req.getSession().getAttribute("loginedMemberId"))
                 .map(id -> (long) id)
                 .orElse(0L);
 
-        if(fromSessionLoginedMemberId > 0) {
-            Member loginedMember = memberService.findById(fromSessionLoginedMemberId).get();
-            model.addAttribute("fromSessionLoginedMember", loginedMember);
+        if(LoginedMemberId > 0) {
+            Member loginedMember = memberService.findById(LoginedMemberId).get();
+            model.addAttribute("LoginedMemberId", loginedMember);
         }
 
         List<Article> articles = articleService.findAll();
@@ -51,7 +51,17 @@ public class ArticleController {
     }
 
     @GetMapping("/article/detail/{id}")
-    String showDetail(Model model, @PathVariable long id) {
+    String showDetail(Model model, @PathVariable long id, HttpServletRequest req) {
+        long LoginedMemberId = Optional
+                .ofNullable(req.getSession().getAttribute("loginedMemberId"))
+                .map(_id -> (long) _id)
+                .orElse(0L);
+
+        if(LoginedMemberId > 0) {
+            Member loginedMember = memberService.findById(LoginedMemberId).get();
+            model.addAttribute("LoginedMemberId", loginedMember);
+        }
+
         Article article = articleService.findById(id).get();
 
 
