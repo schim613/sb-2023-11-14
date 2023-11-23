@@ -72,7 +72,9 @@ public class ArticleController {
 
     //    GET /article/write
     @GetMapping("/article/write")
-    String showWrite(HttpServletRequest req) {
+    String showWrite() {
+        HttpServletRequest req = rq.getReq();
+
         long LoginedMemberId = Optional
                 .ofNullable(req.getSession().getAttribute("loginedMemberId"))
                 .map(_id -> (long) _id)
