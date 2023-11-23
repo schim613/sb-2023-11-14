@@ -3,7 +3,13 @@
 <div layout:fragment="content" class="p-5">
 
     <div class="mb-5" th:if="${loginedMember} != null">
-        <span th:text="${loginedMember.username}"></span>님 환영합니다.
+        <span th:text="${loginedMember.username}"></span>님 환영합니다.(쿠키)
+    </div>
+
+    <hr>
+
+    <div class="mb-5" th:if="${fromSessionLoginedMember} != null">
+        <span th:text="${fromSessionLoginedMember.username}"></span>님 환영합니다.(세션)
     </div>
 
     <h1 class="font-bold mb-4"><i class="fa-solid fa-list-ul"></i> 글 목록</h1>
@@ -13,6 +19,7 @@
             <a class="link" th:href="|/article/detail/${article.id}|" th:text="|${article.id}번 : ${article.title}|"></a>
         </li>
     </ul>
+
 </div>
 
 </html>
