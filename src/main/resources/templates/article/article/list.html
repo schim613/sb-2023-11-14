@@ -2,12 +2,6 @@
 
 <div layout:fragment="content" class="p-5">
 
-    <div class="mb-5" th:if="${loginedMember} != null">
-        <span th:text="${loginedMember.username}"></span>님 환영합니다.(쿠키)
-    </div>
-
-    <hr>
-
     <div class="mb-5" th:if="${fromSessionLoginedMember} != null">
         <span th:text="${fromSessionLoginedMember.username}"></span>님 환영합니다.(세션)
     </div>
