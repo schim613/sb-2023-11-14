@@ -33,13 +33,13 @@ public class ArticleController {
     //    GET /article/doWrite?title=제목&body=내용
     @GetMapping("/article/list")
     String showList(Model model, HttpServletRequest req) {
-        long LoginedMemberId = Optional
+        long loginedMemberId = Optional
                 .ofNullable(req.getSession().getAttribute("loginedMemberId"))
                 .map(id -> (long) id)
                 .orElse(0L);
 
-        if(LoginedMemberId > 0) {
-            Member loginedMember = memberService.findById(LoginedMemberId).get();
+        if(loginedMemberId > 0) {
+            Member loginedMember = memberService.findById(loginedMemberId).get();
             model.addAttribute("LoginedMemberId", loginedMember);
         }
 
@@ -52,13 +52,13 @@ public class ArticleController {
 
     @GetMapping("/article/detail/{id}")
     String showDetail(Model model, @PathVariable long id, HttpServletRequest req) {
-        long LoginedMemberId = Optional
+        long loginedMemberId = Optional
                 .ofNullable(req.getSession().getAttribute("loginedMemberId"))
                 .map(_id -> (long) _id)
                 .orElse(0L);
 
-        if(LoginedMemberId > 0) {
-            Member loginedMember = memberService.findById(LoginedMemberId).get();
+        if(loginedMemberId > 0) {
+            Member loginedMember = memberService.findById(loginedMemberId).get();
             model.addAttribute("LoginedMemberId", loginedMember);
         }
 
@@ -75,14 +75,11 @@ public class ArticleController {
     String showWrite() {
         HttpServletRequest req = rq.getReq();
 
-        long LoginedMemberId = Optional
-                .ofNullable(req.getSession().getAttribute("loginedMemberId"))
-                .map(_id -> (long) _id)
-                .orElse(0L);
+        long loginedMemberId = rq.getLoginedMemberId();
 
-        if(LoginedMemberId > 0) {
-            Member loginedMember = memberService.findById(LoginedMemberId).get();
-            req.setAttribute("LoginedMemberId", loginedMember);
+        if(loginedMemberId > 0) {
+            Member loginedMember = memberService.findById(loginedMemberId).get();
+            req.setAttribute("loginedMemberId", loginedMember);
         }
 
         return "article/article/write";
