@@ -78,7 +78,7 @@ public class ArticleController {
         long loginedMemberId = rq.getLoginedMemberId();
 
         if(loginedMemberId > 0) {
-            Member loginedMember = memberService.findById(loginedMemberId).get();
+            Member loginedMember = rq.getLoginedMember();
             req.setAttribute("loginedMemberId", loginedMember);
         }
 
