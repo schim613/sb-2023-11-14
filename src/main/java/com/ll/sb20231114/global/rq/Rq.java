@@ -32,20 +32,22 @@ public class Rq {
         return "redirect:" + path + "?msg=" + msg;
     }
 
-    public long getLoginedMemberId() {
+    private long getMemberId() {
         return Optional
                 .ofNullable(req.getSession().getAttribute("loginedMemberId"))
                 .map(_id -> (long) _id)
                 .orElse(0L);
     }
 
-    public Member getLoginedMember() {
-        long loginedMemberId = getLoginedMemberId();
+    private boolean isLogined() {
+        return getMemberId() > 0;
+    }
 
-        if (loginedMemberId == 0) {
+    public Member getMember() {
+        if (!isLogined()) {
             return null;
         }
 
-        return memberService.findById(loginedMemberId).get();
+        return memberService.findById(getMemberId()).get();
     }
 }

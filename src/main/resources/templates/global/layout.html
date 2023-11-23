@@ -49,8 +49,8 @@
         <a href="/" class="btn btn-ghost text-xl">SIMPLE</a>
     </div>
     <div class="navbar-end">
-        <a th:if="${@rq.loginedMemberId} != null" href="/member/me" class="btn btn-ghost text-xl">
-            <span th:text="|Welcome ${@rq.loginedMemberId.username}|"></span>
+        <a th:if="${@rq.islogined}" href="/member/me" class="btn btn-ghost text-xl">
+            <span th:text="|Welcome ${@rq.member.username}|"></span>
         </a>
     </div>
 </div>

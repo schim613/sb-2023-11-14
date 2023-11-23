@@ -2,10 +2,8 @@ package com.ll.sb20231114.domain.article.article.controller;
 
 import com.ll.sb20231114.domain.article.article.entity.Article;
 import com.ll.sb20231114.domain.article.article.service.ArticleService;
-import com.ll.sb20231114.domain.member.member.entity.Member;
 import com.ll.sb20231114.domain.member.member.service.MemberService;
 import com.ll.sb20231114.global.rq.Rq;
-import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
@@ -17,7 +15,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
-import java.util.Optional;
 
 
 // 액션 컨트롤러들을 한 곳에 모아 써도 되고, 나눠 써도 된다.
@@ -32,17 +29,7 @@ public class ArticleController {
 
     //    GET /article/doWrite?title=제목&body=내용
     @GetMapping("/article/list")
-    String showList(Model model, HttpServletRequest req) {
-        long loginedMemberId = Optional
-                .ofNullable(req.getSession().getAttribute("loginedMemberId"))
-                .map(id -> (long) id)
-                .orElse(0L);
-
-        if(loginedMemberId > 0) {
-            Member loginedMember = memberService.findById(loginedMemberId).get();
-            model.addAttribute("LoginedMemberId", loginedMember);
-        }
-
+    String showList(Model model) {
         List<Article> articles = articleService.findAll();
 
         model.addAttribute("articles", articles);
@@ -51,17 +38,7 @@ public class ArticleController {
     }
 
     @GetMapping("/article/detail/{id}")
-    String showDetail(Model model, @PathVariable long id, HttpServletRequest req) {
-        long loginedMemberId = Optional
-                .ofNullable(req.getSession().getAttribute("loginedMemberId"))
-                .map(_id -> (long) _id)
-                .orElse(0L);
-
-        if(loginedMemberId > 0) {
-            Member loginedMember = memberService.findById(loginedMemberId).get();
-            model.addAttribute("LoginedMemberId", loginedMember);
-        }
-
+    String showDetail(Model model, @PathVariable long id) {
         Article article = articleService.findById(id).get();
 
 
@@ -73,15 +50,6 @@ public class ArticleController {
     //    GET /article/write
     @GetMapping("/article/write")
     String showWrite() {
-        HttpServletRequest req = rq.getReq();
-
-        long loginedMemberId = rq.getLoginedMemberId();
-
-        if(loginedMemberId > 0) {
-            Member loginedMember = rq.getLoginedMember();
-            req.setAttribute("loginedMemberId", loginedMember);
-        }
-
         return "article/article/write";
     }
 
