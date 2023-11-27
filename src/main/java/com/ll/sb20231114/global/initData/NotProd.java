@@ -6,7 +6,9 @@ import com.ll.sb20231114.domain.member.member.service.MemberService;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 
+@Profile("!prod")
 @Configuration
 public class NotProd {
     @Bean // 스프링부트가 시작될 때 실행이 돼서 initNotProd 이름의 빈이 등록됨
