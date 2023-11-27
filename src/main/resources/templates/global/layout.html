@@ -49,7 +49,7 @@
         <a href="/" class="btn btn-ghost text-xl">SIMPLE</a>
     </div>
     <div class="navbar-end">
-        <a th:if="${@rq.islogined}" href="/member/me" class="btn btn-ghost text-xl">
+        <a th:if="${@rq.logined}" href="/member/me" class="btn btn-ghost text-xl">
             <span th:text="|Welcome ${@rq.member.username}|"></span>
         </a>
     </div>

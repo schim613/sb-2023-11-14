@@ -19,6 +19,7 @@ public class Rq {
     private final HttpServletRequest req;
     private final HttpServletResponse resp;
     private final MemberService memberService;
+    private Member member;
 
     public Rq(HttpServletRequest req, HttpServletResponse resp, MemberService memberService) {
         this.req = req;
@@ -39,7 +40,7 @@ public class Rq {
                 .orElse(0L);
     }
 
-    private boolean isLogined() {
+    public boolean isLogined() {
         return getMemberId() > 0;
     }
 
@@ -48,6 +49,14 @@ public class Rq {
             return null;
         }
 
-        return memberService.findById(getMemberId()).get();
+        if (member == null) {
+            member = memberService.findById(getMemberId()).get();
+        }
+
+        return member;
+    }
+
+    public void setSessionAttr(String name, long value) {
+        req.getSession().setAttribute(name, value);
     }
 }
