@@ -59,4 +59,8 @@ public class Rq {
     public void setSessionAttr(String name, long value) {
         req.getSession().setAttribute(name, value);
     }
+
+    public void removeSessionAttr(String name) {
+        req.getSession().removeAttribute(name);
+    }
 }
