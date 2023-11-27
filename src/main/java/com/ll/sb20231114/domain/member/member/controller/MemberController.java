@@ -27,7 +27,8 @@ public class MemberController {
     public static class LoginForm {
         @NotBlank(message = "아이디를 입력해주세요.")
         private String username;
-        @NotBlank @NotNull
+        @NotBlank
+        @NotNull
         private String password;
     }
 
@@ -63,7 +64,8 @@ public class MemberController {
     public static class JoinForm {
         @NotBlank(message = "아이디를 입력해주세요.")
         private String username;
-        @NotBlank @NotNull
+        @NotBlank
+        @NotNull
         private String password;
     }
 
