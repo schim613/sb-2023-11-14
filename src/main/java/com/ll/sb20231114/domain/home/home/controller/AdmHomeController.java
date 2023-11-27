@@ -12,9 +12,11 @@ public class AdmHomeController {
 
     @GetMapping("/adm")
     public String showMain() {
-        if (!rq.isAdmin()) {
-            throw new RuntimeException("관리자만 접근할 수 있습니다.");
-        }
         return "home/home/adm/main";
+    }
+
+    @GetMapping("/adm/home/about")
+    public String showAbout() {
+        return "home/home/adm/about";
     }
 }
