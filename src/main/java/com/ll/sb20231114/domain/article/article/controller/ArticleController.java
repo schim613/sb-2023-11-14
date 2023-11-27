@@ -4,7 +4,6 @@ import com.ll.sb20231114.domain.article.article.entity.Article;
 import com.ll.sb20231114.domain.article.article.service.ArticleService;
 import com.ll.sb20231114.domain.member.member.service.MemberService;
 import com.ll.sb20231114.global.rq.Rq;
-import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
@@ -67,7 +66,7 @@ public class ArticleController {
     //    GET /article/doWrite?title=제목&body=내용
     @PostMapping("/article/write")
     @SneakyThrows
-    String write(@Valid WriteForm writeForm, HttpServletRequest req) {
+    String write(@Valid WriteForm writeForm) {
         if (!rq.isLogined()) throw new RuntimeException("로그인 후 이용해주세요.");
 
         Article article = articleService.write(rq.getMember(), writeForm.title, writeForm.body);
