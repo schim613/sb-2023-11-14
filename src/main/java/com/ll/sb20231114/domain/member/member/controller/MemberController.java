@@ -44,6 +44,7 @@ public class MemberController {
         // 요청과 관련된 세션 저장소
         // 현재 접속한 브라우저(rq)한테 정보를 저장한다. 너는 이 회원이야.
         rq.setSessionAttr("loginedMemberId", member.getId());
+        rq.setSessionAttr("authorities", member.getAuthorities());
 
         return rq.redirect("/article/list", "로그인이 완료되었습니다.");
     }
