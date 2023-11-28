@@ -42,7 +42,7 @@ public class MemberController {
 
         // 로그인 처리
         // 요청과 관련된 세션 저장소
-        // 현재 접속한 브라우저(rq)한테 정보를 저장한다. 너는 이 회원이야.
+        // 현재 접속한 브라우저(rq)한테 정보와 권한을 저장한다.
         rq.setSessionAttr("loginedMemberId", member.getId());
         rq.setSessionAttr("authorities", member.getAuthorities());
 
