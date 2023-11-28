@@ -45,8 +45,7 @@ public class ArticleService {
         articleRepository.delete(id);
     }
 
-    public void modify(long id, String title, String body) {
-        Article article = findById(id).get();
+    public void modify(Article article``qw, String title, String body) {
         article.setTitle(title);
         article.setBody(body);
     }
