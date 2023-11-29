@@ -3,6 +3,7 @@ package com.ll.sb20231114.domain.member.member.service;
 import com.ll.sb20231114.domain.member.member.entity.Member;
 import com.ll.sb20231114.domain.member.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,8 +13,10 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class MemberService {
     private final MemberRepository memberRepository;
+    private final PasswordEncoder passwordEncorder;
 
     public Member join(String username, String password) {
+        password = passwordEncorder.encode(password);
         Member member = new Member(username, password);
 
         memberRepository.save(member);
