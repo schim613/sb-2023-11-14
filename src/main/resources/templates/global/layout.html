@@ -7,7 +7,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>SIMPLE</title>
 
-    <!-- 폰트어썸 -->    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <!-- 폰트어썸 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 
     <!-- 제이쿼리 -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
@@ -21,6 +22,9 @@
 
     <!-- global js -->
     <script src="/resource/global.js"></script>
+
+    <meta name="_csrf" th:content="${_csrf.token}"/>
+    <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
 </head>
 <body>
 
@@ -41,7 +45,7 @@
                 <li th:unless="${@rq.logined}"><a href="/member/login"><i class="fa-solid fa-right-to-bracket"></i> 로그인</a></li>
                 <li th:unless="${@rq.logined}"><a href="/member/join"><i class="fa-solid fa-user-plus"></i> 회원가입</a></li>
                 <li th:if="${@rq.logined}"><a href="/member/me"><i class="fa-solid fa-user"></i> 내 정보</a></li>
-                <li th:if="${@rq.logined}"><a href="/member/logout"><i class="fa-solid fa-right-from-bracket"></i> 로그아웃</a></li>
+                <li th:if="${@rq.logined}"><a href="/member/logout" method="POST"><i class="fa-solid fa-right-from-bracket"></i> 로그아웃</a></li>
             </ul>
         </div>
     </div>
