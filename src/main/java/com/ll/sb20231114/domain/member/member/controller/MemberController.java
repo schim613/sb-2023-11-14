@@ -1,6 +1,5 @@
 package com.ll.sb20231114.domain.member.member.controller;
 
-import com.ll.sb20231114.domain.member.member.entity.Member;
 import com.ll.sb20231114.domain.member.member.service.MemberService;
 import com.ll.sb20231114.global.rq.Rq;
 import jakarta.validation.Valid;
@@ -21,32 +20,6 @@ public class MemberController {
     @GetMapping("/member/login")
     String showLogin() {
         return "member/member/login";
-    }
-
-    @Data
-    public static class LoginForm {
-        @NotBlank(message = "아이디를 입력해주세요.")
-        private String username;
-        @NotBlank
-        @NotNull
-        private String password;
-    }
-
-    @PostMapping("/member/login")
-    String login(@Valid LoginForm loginForm) {
-        Member member = memberService.findByUsername(loginForm.username).get();
-
-        if (!member.getPassword().equals(loginForm.password)) {
-            throw new IllegalArgumentException("비밀번호가 일치하지 않습니다.");
-        }
-
-        // 로그인 처리
-        // 요청과 관련된 세션 저장소
-        // 현재 접속한 브라우저(rq)한테 정보와 권한을 저장한다.
-        rq.setSessionAttr("loginedMemberId", member.getId());
-        rq.setSessionAttr("authorities", member.getAuthorities());
-
-        return rq.redirect("/article/list", "로그인이 완료되었습니다.");
     }
 
     @GetMapping("/member/logout")

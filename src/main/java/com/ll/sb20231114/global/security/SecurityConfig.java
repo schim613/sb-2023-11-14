@@ -15,6 +15,15 @@ public class SecurityConfig {
 //                    csrf -> csrf.disable()
 //                );
 
-        return http.build();
+        return http
+                .formLogin(
+                        formLogin -> formLogin
+                                .loginPage("/member/login")
+                                .loginProcessingUrl("/member/login")
+                                .usernameParameter("username")
+                                .passwordParameter("password")
+                                .defaultSuccessUrl("/article/list")
+                )
+                .build();
     }
 }
