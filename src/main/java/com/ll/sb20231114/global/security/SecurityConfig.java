@@ -21,9 +21,9 @@ public class SecurityConfig {
                 .formLogin(
                         formLogin -> formLogin
                                 .loginPage("/member/login")
-                                .loginProcessingUrl("/member/login")
-                                .usernameParameter("username")
-                                .passwordParameter("password")
+//                                .loginProcessingUrl("/member/login") 위와 같으면 생략 가능
+//                                .usernameParameter("username") 기본 이름이 username, password 이면 생략 가능
+//                                .passwordParameter("password")
                                 .defaultSuccessUrl("/article/list")
                 )
                 .build();
