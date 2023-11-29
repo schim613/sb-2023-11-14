@@ -18,13 +18,13 @@ public class MemberController {
     private final MemberService memberService;
     private final Rq rq;
 
-    @PreAuthorize("isAuthenticated()")
+    @PreAuthorize("isAnonymous()")
     @GetMapping("/member/login")
     String showLogin() {
         return "member/member/login";
     }
 
-    @PreAuthorize("isAuthenticated()")
+    @PreAuthorize("isAnonymous()")
     @GetMapping("/member/join")
     String showJoin() {
         return "member/member/join";
@@ -39,7 +39,7 @@ public class MemberController {
         private String password;
     }
 
-    @PreAuthorize("isAuthenticated()")
+    @PreAuthorize("isAnonymous()")
     @PostMapping("/member/join")
     String join(@Valid JoinForm joinForm) {
         memberService.join(joinForm.username, joinForm.password);
