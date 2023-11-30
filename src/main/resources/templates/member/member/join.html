@@ -1,5 +1,8 @@
 <html layout:decorate="~{global/layout}">
 
+<head></head>
+<body>
+
 <div layout:fragment="content" class="p-5">
     <h1 class="font-bold mb-4"><i class="fa-solid fa-user-plus"></i> 회원가입</h1>
 
@@ -27,25 +30,20 @@
 
     <script>
         function submitJoinForm(form) {
-            const inputUsername = form.username;
-            const inputPassword = form.password;
+            form.username.value = inputUsername.value.trim();
 
-            inputUsername.value = inputUsername.value.trim();
-            inputPassword.value = inputPassword.value.trim();
-
-            const username = inputUsername.value;
-            const password = inputPassword.value;
-
-            if (username.length == 0) {
+            if (form.username.value.length == 0) {
                 toastWarning('아이디를 입력해주세요.');
-                inputUsername.focus();
+                form.username.focus();
 
                 return;
             }
 
-            if (password.length == 0) {
+            form.password.value = inputPassword.value.trim();
+
+            if (form.password.value.length == 0) {
                 toastWarning('비밀번호를 입력해주세요.');
-                inputPassword.focus();
+                form.password.focus();
 
                 return;
             }
@@ -55,4 +53,5 @@
     </script>
 </div>
 
+</body>
 </html>
