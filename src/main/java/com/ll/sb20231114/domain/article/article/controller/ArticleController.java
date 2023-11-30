@@ -7,14 +7,10 @@ import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
-import lombok.SneakyThrows;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -25,11 +21,9 @@ import java.util.List;
 @RequiredArgsConstructor // final 필드들(입력받은 생성자)을 자동으로 생성해라
 @RequestMapping("/article")
 public class ArticleController {
-    // @Autowired 필드 주입, final은 뺀다.
     private final ArticleService articleService;
     private final Rq rq;
 
-    //    GET /article/doWrite?title=제목&body=내용
     @GetMapping("/list")
     String showList(Model model) {
         List<Article> articles = articleService.findAll();
@@ -64,7 +58,6 @@ public class ArticleController {
 
     @PreAuthorize("isAuthenticated()")
     @PostMapping("/write")
-    @SneakyThrows
     String write(@Valid WriteForm writeForm) {
         Article article = articleService.write(rq.getMember(), writeForm.title, writeForm.body);
 
@@ -92,7 +85,7 @@ public class ArticleController {
     }
 
     @PreAuthorize("isAuthenticated()")
-    @PostMapping("/modify/{id}")
+    @PutMapping("/modify/{id}")
     String modify(@PathVariable long id, @Valid ModifyForm modifyForm) {
         Article article = articleService.findById(id).get();
 
@@ -104,7 +97,7 @@ public class ArticleController {
     }
 
     @PreAuthorize("isAuthenticated()")
-    @PostMapping("/delete/{id}")
+    @DeleteMapping("/delete/{id}")
     String delete(@PathVariable long id) {
         Article article = articleService.findById(id).get();
 
