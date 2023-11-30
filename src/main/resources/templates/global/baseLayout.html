@@ -33,7 +33,7 @@
 <link href="https://cdn.jsdelivr.net/npm/daisyui@4.4.2/dist/full.min.css" rel="stylesheet" type="text/css" />
 <script src="https://cdn.tailwindcss.com"></script>
 
-<header layout:fragment="header"></header>
+<th:block layout:fragment="header"></th:block>
 
 <script>
     const queryParams = getQueryParams();
@@ -43,7 +43,9 @@
     }
 </script>
 
-<th:block layout:fragment="content"></th:block>
+ <main class="p-5">
+     <th:block layout:fragment="content"></th:block>
+ </main>
 
 </body>
 </html>
