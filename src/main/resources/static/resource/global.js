@@ -17,6 +17,8 @@ toastr.options = {
 };
 
 function toastWarning(msg) {
+    parseMsg(msg);
+
     toastr["warning"](msg, "경고");
 }
 
