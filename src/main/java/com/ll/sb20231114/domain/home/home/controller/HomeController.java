@@ -18,7 +18,7 @@ public class HomeController { // HomeController가 1개 -> 싱글톤 -> 객체�
 
     @GetMapping("/")
     public String goToArticleList(String msg) {
-        msg = (msg != null) ? msg : "";
+        // msg = (msg != null) ? msg : "";
 
         return rq.redirect("/article/list", msg);
     }
