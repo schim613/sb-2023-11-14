@@ -1,10 +1,12 @@
 <html layout:decorate="~{global/layout}" xmlns:th="http://www.w3.org/1999/html">
 
-<head></head>
+<head>
+    <title th:text="|게시글 목록|"></title>
+</head>
 
 <body>
 <div layout:fragment="content">
-    <h1 class="font-bold mb-4"><i class="fa-solid fa-list-ul"></i> 글 목록</h1>
+    <h1 class="font-bold mb-4"><i class="fa-solid fa-list-ul"></i> 게시글 목록</h1>
 
     <ul th:if="${articles.size} > 0">
         <li th:each="article : ${articles.reversed}">

@@ -109,4 +109,11 @@ public class ArticleController {
 
         return rq.redirect("/article/list", "%d번 게시물이 삭제되었습니다.".formatted(id));
     }
+
+    @PreAuthorize("isAuthenticated()")
+    @GetMapping("/write2")
+    String showWrite2() {
+        return "article/article/write2";
+    }
+
 }

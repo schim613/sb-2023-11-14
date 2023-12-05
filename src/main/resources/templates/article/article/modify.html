@@ -1,11 +1,13 @@
 <html layout:decorate="~{global/layout}">
 
-<head></head>
+<head>
+    <title th:text="|게시글 수정|"></title>
+</head>
 
 <body>
 <div layout:fragment="content">
     <h1 class="font-bold mb-4">
-        <i class="fa-solid fa-pencil"></i> 글 수정
+        <i class="fa-solid fa-pencil"></i> 게시글 수정
     </h1>
 
     <form th:action class="flex flex-col gap-4" method="POST" onsubmit="submitModifyForm(this); return false;">
