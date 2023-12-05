@@ -113,21 +113,21 @@ public class ArticleController {
 
     @Data
     public static class ArticleCreateForm {
-        @NotBlank
+        @NotBlank(message = "제목을 입력해주세요.")
         private String title;
-        @NotBlank
+        @NotBlank(message = "내용을 입력해주세요.")
         private String body;
     }
 
     @PreAuthorize("isAuthenticated()")
     @GetMapping("/write2")
-    String showWrite2() {
+    String showWrite2(ArticleCreateForm articleCreateForm) {
         return "article/article/write2";
     }
 
     @PreAuthorize("isAuthenticated()")
     @PostMapping("/write2")
-    String write2(@Valid ArticleCreateForm form, BindingResult bindingResult) {
+    String write2(@Valid ArticleCreateForm articleCreateForm, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "article/article/write2";
         }
