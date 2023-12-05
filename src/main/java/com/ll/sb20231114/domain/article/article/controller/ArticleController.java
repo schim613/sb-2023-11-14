@@ -78,7 +78,7 @@ public class ArticleController {
 
     @Data
     public static class ModifyForm {
-        @NotBlank(message = "제목 좀..")
+        @NotBlank
         private String title;
         @NotBlank
         private String body;
