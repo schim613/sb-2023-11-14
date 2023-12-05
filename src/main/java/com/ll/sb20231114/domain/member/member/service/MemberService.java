@@ -2,6 +2,7 @@ package com.ll.sb20231114.domain.member.member.service;
 
 import com.ll.sb20231114.domain.member.member.entity.Member;
 import com.ll.sb20231114.domain.member.member.repository.MemberRepository;
+import com.ll.sb20231114.global.rsData.RsData;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -15,9 +16,9 @@ public class MemberService {
     private final MemberRepository memberRepository;
     private final PasswordEncoder passwordEncorder;
 
-    public Member join(String username, String password) {
+    public RsData<Member> join(String username, String password) {
         if (findByUsername(username).isPresent()) {
-            return null;
+            return new RsData<>("F-1", "이미 존재하는 회원입니다.");
         }
 
         password = passwordEncorder.encode(password);
@@ -25,7 +26,11 @@ public class MemberService {
 
         memberRepository.save(member);
 
-        return member;
+        return new RsData<>(
+                "S-1",
+                "%s님 환영합니다.".formatted(member.getUsername()),
+                member
+        );
     }
 
     public List<Member> findAll() {
