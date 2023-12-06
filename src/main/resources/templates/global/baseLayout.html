@@ -42,11 +42,13 @@
         toastNotice(queryParams.msg);
     }
 
-    const historyBackMsg = localStorage.getItem('historyBackMsg');
+    $(window).bind ("pageshow", function(event)) {
+        const historyBackMsg = localStorage.getItem('historyBackMsg');
 
-    if (historyBackMsg) {
-        toastWarning(historyBackMsg);
-        localStorage.removeItem('historyBackMsg');
+        if (historyBackMsg) {
+            toastWarning(historyBackMsg);
+            localStorage.removeItem('historyBackMsg');
+        }
     }
 </script>
 
